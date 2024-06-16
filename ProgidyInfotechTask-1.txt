@@ -1,0 +1,68 @@
+//Task1
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+double celsiusToFahrenheit(double celsius) {
+    return (celsius * 9.0 / 5.0) + 32.0;
+}
+
+double celsiusToKelvin(double celsius) {
+    return celsius + 273.15;
+}
+
+double fahrenheitToCelsius(double fahrenheit) {
+    return (fahrenheit - 32.0) * 5.0 / 9.0;
+}
+
+double fahrenheitToKelvin(double fahrenheit) {
+    return fahrenheitToCelsius(fahrenheit) + 273.15;
+}
+
+double kelvinToCelsius(double kelvin) {
+    return kelvin - 273.15;
+}
+
+double kelvinToFahrenheit(double kelvin) {
+    return celsiusToFahrenheit(kelvinToCelsius(kelvin));
+}
+
+int main() {
+    double tempValue;
+    char unit;
+
+    // Get temperature value and unit from user
+    cout << "Enter the temperature value: ";
+    cin >> tempValue;
+    cout << "Enter the unit of the temperature (C for Celsius, F for Fahrenheit, K for Kelvin): ";
+    cin >> unit;
+
+    cout << fixed << setprecision(2); // Set output precision to 2 decimal places
+
+    switch (toupper(unit)) {
+        case 'C': {
+            double fahrenheit = celsiusToFahrenheit(tempValue);
+            double kelvin = celsiusToKelvin(tempValue);
+            cout << tempValue << "°C is " << fahrenheit << "°F and " << kelvin << "K" << endl;
+            break;
+        }
+        case 'F': {
+            double celsius = fahrenheitToCelsius(tempValue);
+            double kelvin = fahrenheitToKelvin(tempValue);
+            cout << tempValue << "°F is " << celsius << "°C and " << kelvin << "K" << endl;
+            break;
+        }
+        case 'K': {
+            double celsius = kelvinToCelsius(tempValue);
+            double fahrenheit = kelvinToFahrenheit(tempValue);
+            cout << tempValue << "K is " << celsius << "°C and " << fahrenheit << "°F" << endl;
+            break;
+        }
+        default:
+            cout << "Invalid unit. Please enter C for Celsius, F for Fahrenheit, or K for Kelvin." << endl;
+    }
+
+    return 0;
+}
+
